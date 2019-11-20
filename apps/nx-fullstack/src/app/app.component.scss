@@ -4,9 +4,9 @@
 :host {
   display: block;
   font-family: sans-serif;
-  min-width: 300px;
-  max-width: 600px;
-  margin: 50px auto;
+  // min-width: 300px;
+  // max-width: 600px;
+  // margin: 50px auto;
 }
 
 .gutter-left {
@@ -130,4 +130,25 @@ summary {
   height: 16px;
   width: 16px;
   margin-right: 4px;
+}
+
+.root {
+  width: 100%;
+}
+
+.navbar {
+  width: 100%;
+}
+
+.navbar-brand {
+  max-width: 80%;
+  margin: auto;
+  width: 100%;
+  display: flex;
+  align-content: space-between;
+  border: black 1px solid;
+}
+
+.columns {
+  margin: 50px;
 }

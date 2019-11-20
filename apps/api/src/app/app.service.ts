@@ -4,6 +4,6 @@ import { Message } from '@nx-fullstack/api-interfaces';
 @Injectable()
 export class AppService {
   getData(): Message {
-    return { message: 'Welcome to api!' };
+    return { message: 'Api Working' };
   }
 }

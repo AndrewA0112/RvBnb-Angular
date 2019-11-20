@@ -1,0 +1,20 @@
+<form [formGroup]="registerForm" (submit)="registerUser()">
+  <label>
+    Username:
+    <input type="text" formControlName="username" required>
+  </label>
+  <label>
+    Password:
+    <input type="password" formControlName="password" required>
+  </label>
+  <div>
+    <input type="radio" formControlName="isLandOwner" value="true" required>
+    <label for="isLandOwner">Land Owner</label>
+  </div>
+  <div>
+    <input type="radio" formControlName="isLandOwner" value="false" required>
+    <label for="isLandOwner">RV Owner</label>
+  </div>
+  <div *ngIf="registerFailed">Bad Register!</div>
+  <button type="submit" [disabled]="!registerForm.valid">Register</button>
+</form>
