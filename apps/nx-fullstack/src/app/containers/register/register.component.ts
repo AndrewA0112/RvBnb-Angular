@@ -1,15 +1,15 @@
-import { UserService } from './../services/user.service';
-import { AuthService } from './../services/auth.service';
+import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'nx-fullstack-register-form',
-  templateUrl: './register-form.component.html',
-  styleUrls: ['./register-form.component.scss']
+  selector: 'nx-fullstack-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
-export class RegisterFormComponent {
+export class RegisterComponent {
 
   registerForm = new FormGroup({
     username: new FormControl(''),
@@ -19,11 +19,7 @@ export class RegisterFormComponent {
 
   registerFailed: Boolean = false
 
-  constructor(private auth: AuthService, private user: UserService, private router: Router) {
-    if(user.isLogged()) {
-      this.router.navigate(['/'])
-    }
-  }
+  constructor(private auth: AuthService, private user: UserService, private router: Router) {}
 
   registerUser() {
     const username = this.registerForm.value.username

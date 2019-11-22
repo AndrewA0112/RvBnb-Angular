@@ -1,5 +1,4 @@
 import { UserEffects } from './store/effects/user.effects';
-import { RegisterFormModule } from './register-form/register-form.module';
 import { AppService } from './services/app.service';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginFormModule } from './login-form/login-form.module';
+import * as containers from './containers'
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -24,16 +23,18 @@ import { EffectsModule } from '@ngrx/effects';
    imports: [
       StoreModule.forRoot({ user: fromUser.reducer }),
       EffectsModule.forRoot([UserEffects]),
-      StoreDevtoolsModule.instrument({
-         maxAge: 25, // Retains last 25 states
-      }),
+      StoreDevtoolsModule.instrument(),
       BrowserModule,
       HttpClientModule,
-      LoginFormModule,
-      RegisterFormModule,
+
+      // Containers
+      containers.LoginModule,
+      containers.RegisterModule,
+      containers.HomeModule,
+
       AppRoutingModule,
       FormsModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
    ],
    providers: [ AppService ],
    bootstrap: [

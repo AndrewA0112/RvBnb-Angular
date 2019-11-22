@@ -1,31 +1,24 @@
+import { State } from './store/reducers/user.reducer';
 import { AppService } from './services/app.service';
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Message } from '@nx-fullstack/api-interfaces';
+import { Component } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import * as SelectorList from './store/selectors'
+
 
 @Component({
   selector: 'nx-fullstack-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  // hello$ = this.http.get<Message>('/api/hello');
-  
-  listings: any = []
+export class AppComponent {
+  state: State | any
 
-  constructor(private appService: AppService) {
-    // this.http.get('https://rvbnb.herokuapp.com/api/listings')
-    //   .subscribe(res => {
-    //     console.log(res)
-    //     this.listings = res
-    //   })
-  }
-
-  ngOnInit() {
-    this.appService.getListings()
-      .subscribe(res => {
-        console.log(res)
-        this.listings = res
-      })
+  constructor(private store: Store<State>) {
+    store.pipe(select(SelectorList.selectState))
+      .subscribe(
+        res => {
+          this.state = res
+        }
+      )
   }
 }

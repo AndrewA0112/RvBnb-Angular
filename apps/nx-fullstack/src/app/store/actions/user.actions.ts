@@ -15,5 +15,10 @@ export const loginComplete = createAction(
 
 export const loginFailure = createAction(
     '[Login Page] Login Failure',
-    (errorMessage = 'Error logging in') => ({ payload: {errorMessage}})
+    (errorMessage = 'Error logging in') => ({errorMessage})
+)
+
+export const loadCachedToken = createAction(
+    '[Login Page] Load Cached Token',
+    props<{decodedToken: any}>()
 )

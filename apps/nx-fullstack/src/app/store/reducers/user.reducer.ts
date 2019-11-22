@@ -1,4 +1,4 @@
-import { login, loginComplete } from './../actions/user.actions';
+import * as LoginActions from './../actions/user.actions';
 import { Action, createReducer, on } from '@ngrx/store'
 
 export interface User {
@@ -24,12 +24,23 @@ export const initialState = {
 
 const userReducer = createReducer(
     initialState,
-    on(login, state => ({ ...state, loading: true})),
-    on(loginComplete, (state, { user }) => ({
+    on(LoginActions.login, state => ({ ...state, loading: true})),
+    on(LoginActions.loginComplete, (state, { user }) => ({
         ...state,
         isAuthenticated: true,
         user: user,
         loading: false
+    })),
+    on(LoginActions.loginFailure, (state, { errorMessage }) => ({
+        ...state,
+        isAuthenticated: false,
+        loading: false,
+        errorMessage: errorMessage
+    })),
+    on(LoginActions.loadCachedToken, (state, { decodedToken }) => ({
+        ...state,
+        isAuthenticated: true,
+        user: decodedToken
     }))
 )
 

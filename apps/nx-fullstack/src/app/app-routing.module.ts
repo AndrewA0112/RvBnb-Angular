@@ -1,7 +1,6 @@
-import { RegisterFormComponent } from './register-form/register-form.component';
 import { RouteGuard } from './services/route-guard.service';
 import { AppComponent } from './app.component';
-import { LoginFormComponent } from './login-form/login-form.component';
+import * as containers from './containers'
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -10,7 +9,7 @@ const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        component: AppComponent,
+        component: containers.HomeComponent,
         canActivate: [RouteGuard],
         data: {
             redirect: ['/login']
@@ -19,12 +18,16 @@ const routes: Routes = [
     { 
         path: 'login',
         pathMatch: 'full',
-        component: LoginFormComponent 
+        component: containers.LoginComponent
     },
     {
         path: 'register',
         pathMatch: 'full',
-        component: RegisterFormComponent
+        component: containers.RegisterComponent
+    },
+    {
+        path: '**',
+        redirectTo: '/',
     }
 ];
 

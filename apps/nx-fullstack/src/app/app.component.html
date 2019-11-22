@@ -20,14 +20,7 @@
       </div>
     </div>
   </nav>
-  <div class="columns is-variable is-3 is-multiline">
-    <div class='column is-half' *ngFor='let listing of listings'>
-      <div class='has-background-danger'>
-        <h1>Location: {{listing.location}}</h1>
-        <p>Description: {{listing.description}}</p>
-        <p>${{listing.price_per_day}} Per Night</p>
-      </div>
-    </div>
+  <div *ngIf="state.loading" class="loader">
   </div>
 
 <router-outlet></router-outlet>

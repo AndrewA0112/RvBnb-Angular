@@ -10,9 +10,4 @@ export class UserService {
   setToken(token: string): void {
     localStorage.setItem(TOKEN, token)
   }
-
-  isLogged() {
-    return localStorage.getItem(TOKEN) != null;
-  }
-
 }
