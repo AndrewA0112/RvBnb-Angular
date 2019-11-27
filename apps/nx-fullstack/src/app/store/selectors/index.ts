@@ -1,10 +1,11 @@
-import * as fromApp from '../reducers/user.reducer'
+import * as reducersRoot from '../reducers'
 import { createSelector } from '@ngrx/store'
 
-export const selectApp = (state: fromApp.State) => state
-export const selectUser = (state: fromApp.State) => state.user
+export const selectApp = (state: reducersRoot.State) => state
+export const selectAppListing = (state: reducersRoot.State) => state.listing
+export const selectAppUser = (state: reducersRoot.State) => state.user
 
-export const selectState = createSelector(
-    selectApp,
-    selectUser,
+export const selectIsAuthenticated = createSelector(
+    selectAppUser,
+    (user) => user.token !== null
 )

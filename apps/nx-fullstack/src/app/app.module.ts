@@ -12,6 +12,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
+import * as fromListing from './store/reducers/listing.reducer'
 import * as fromUser from './store/reducers/user.reducer'
 import { EffectsModule } from '@ngrx/effects';
 
@@ -21,7 +22,10 @@ import { EffectsModule } from '@ngrx/effects';
       AppComponent,
    ],
    imports: [
-      StoreModule.forRoot({ user: fromUser.reducer }),
+      StoreModule.forRoot({
+         listing: fromListing.reducer,
+         user: fromUser.reducer
+      }),
       EffectsModule.forRoot([UserEffects]),
       StoreDevtoolsModule.instrument(),
       BrowserModule,

@@ -20,5 +20,5 @@ export const loginFailure = createAction(
 
 export const loadCachedToken = createAction(
     '[Login Page] Load Cached Token',
-    props<{decodedToken: any}>()
+    props<{ token: string }>()
 )

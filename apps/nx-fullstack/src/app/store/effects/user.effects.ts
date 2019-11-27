@@ -7,7 +7,6 @@ import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { of, EMPTY } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import decode from 'jwt-decode'
 
 @Injectable()
 export class UserEffects {
@@ -19,8 +18,7 @@ export class UserEffects {
         switchMap(() => {
             const token = localStorage.getItem('TOKEN');
             if (token) {
-                const decodedToken = decode(token)
-                return of(LoginActions.loadCachedToken({decodedToken}))
+                return of(LoginActions.loadCachedToken({token}))
             } else {
                 return EMPTY
             }

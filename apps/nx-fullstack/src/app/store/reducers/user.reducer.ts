@@ -1,46 +1,47 @@
-import * as LoginActions from './../actions/user.actions';
-import { Action, createReducer, on } from '@ngrx/store'
+import * as LoginActions from '../actions/user.actions';
+import { Action, createReducer, on } from '@ngrx/store';
+import decode from 'jwt-decode'
 
-export interface User {
-    id: string;
+export interface State {
+    id: number;
     username: string;
     token: string;
     is_land_owner: boolean;
+    exp: number;
+    iat: number;
+    loading: boolean;
+    errorMessage: string;
 }
 
-export interface State {
-    isAuthenticated: boolean,
-    user: User | null,
-    errorMessage: string | null,
-    loading: boolean
-}
-
-export const initialState = {
-    isAuthenticated: false,
-    user: null,
-    errorMessage: null,
-    loading: false
+export const initialState: State = {
+    id: null,
+    username: null,
+    token: null,
+    is_land_owner: null,
+    exp: null,
+    iat: null,
+    loading: null,
+    errorMessage: null
 }
 
 const userReducer = createReducer(
     initialState,
     on(LoginActions.login, state => ({ ...state, loading: true})),
     on(LoginActions.loginComplete, (state, { user }) => ({
-        ...state,
-        isAuthenticated: true,
-        user: user,
-        loading: false
+        ...user,
+        loading: false,
+        errorMessage: null,
     })),
     on(LoginActions.loginFailure, (state, { errorMessage }) => ({
         ...state,
-        isAuthenticated: false,
         loading: false,
         errorMessage: errorMessage
     })),
-    on(LoginActions.loadCachedToken, (state, { decodedToken }) => ({
-        ...state,
-        isAuthenticated: true,
-        user: decodedToken
+    on(LoginActions.loadCachedToken, (state, { token }) => ({
+        ...decode(token),
+        token,
+        loading: false,
+        errorMessage: null
     }))
 )
 

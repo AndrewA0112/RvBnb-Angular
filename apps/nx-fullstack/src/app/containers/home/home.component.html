@@ -1,3 +1,23 @@
 <div>
   Welcome to the RvBnB Home Page
 </div>
+
+listing$
+
+<pre>{{listing$|async|json}}</pre>
+
+listingEntries$
+
+<pre>{{listingEntries$|async|json}}</pre>
+
+listingBestEntry$
+
+<ng-container *ngIf="listingBestEntry$|async; let listingBestEntry">
+
+  <pre>{{listingBestEntry|json}}</pre>
+
+</ng-container>
+
+<nx-fullstack-testing-component [entries]="listingEntries$|async"></nx-fullstack-testing-component>
+
+<button (click)="doSomething()">on something</button>
